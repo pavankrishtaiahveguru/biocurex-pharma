@@ -8,39 +8,57 @@ const ProductGallery = () => {
   const galleryImages = [
     {
       id: 1,
-      src: "/images/gallery/gallery-1.png",
+      src: "/images/gallery/image1.jpeg",
       alt: "BioCurex Pharma product showcase",
       size: "large",
     },
     {
       id: 2,
-      src: "/images/gallery/gallery-2.png",
+      src: "/images/gallery/image2.jpeg",
       alt: "BioCurex Pharma pharmaceutical products",
-      size: "medium",
+      size: "small",
     },
     {
       id: 3,
-      src: "/images/gallery/gallery-3.png",
+      src: "/images/gallery/image3.jpeg",
       alt: "BioCurex Pharma healthcare products",
       size: "small",
     },
     {
       id: 4,
-      src: "/images/gallery/gallery-4.png",
+      src: "/images/gallery/image4.jpeg",
       alt: "BioCurex Pharma product packaging",
       size: "small",
     },
     {
       id: 5,
-      src: "/images/gallery/gallery-5.png",
+      src: "/images/gallery/image5.jpeg",
       alt: "BioCurex Pharma pharmaceutical range",
-      size: "large",
+      size: "small",
     },
     {
       id: 6,
-      src: "/images/gallery/gallery-6.png",
+      src: "/images/gallery/image6.jpeg",
       alt: "BioCurex Pharma medicine products",
-      size: "medium",
+      size: "small",
+    },
+    {
+      id: 7,
+      src: "/images/gallery/image7.jpeg",
+      alt: "BioCurex Pharma medicine products",
+      size: "small",
+    },
+    {
+      id: 8,
+      src: "/images/gallery/image8.jpeg",
+      alt: "BioCurex Pharma medicine products",
+      size: "small",
+    },
+    {
+      id: 9,
+      src: "/images/gallery/image9.jpeg",
+      alt: "BioCurex Pharma medicine products",
+      size: "small",
     },
   ];
 
