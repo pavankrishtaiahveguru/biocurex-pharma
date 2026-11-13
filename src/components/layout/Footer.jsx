@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUp, Mail, MapPin, Phone } from "lucide-react";
 import DevelopedByStaffArc from "../common/DevelopedByStaffArc";
 import contactInfo from "@/data/contact";
+import HomeLink from "@/components/common/HomeLink";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -37,7 +38,7 @@ const Footer = () => {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <Link href="/" className="inline-flex items-center">
+            <HomeLink className="inline-flex cursor-pointer items-center">
               <Image
                 src="/bio-curex-logo.png"
                 alt="Biocurex Pharma"
@@ -45,7 +46,7 @@ const Footer = () => {
                 height={220}
                 className="h-[85px] w-auto object-contain"
               />
-            </Link>
+            </HomeLink>
 
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/70">
               Innovating care, curing fast. Committed to delivering quality
@@ -59,13 +60,22 @@ const Footer = () => {
 
             <div className="mt-5 space-y-3">
               {quickLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="block cursor-pointer text-sm text-white/70 transition hover:text-[#72c51b]"
-                >
-                  {link.name}
-                </Link>
+                link.href === "/" ? (
+                  <HomeLink
+                    key={link.name}
+                    className="block cursor-pointer text-sm text-white/70 transition hover:text-[#72c51b]"
+                  >
+                    {link.name}
+                  </HomeLink>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="block cursor-pointer text-sm text-white/70 transition hover:text-[#72c51b]"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
             </div>
           </div>

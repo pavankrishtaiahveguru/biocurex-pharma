@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, Phone, X } from "lucide-react";
 import contactInfo from "@/data/contact";
+import HomeLink from "@/components/common/HomeLink";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,8 +26,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link
-          href="/"
+        <HomeLink
           onClick={closeMenu}
           className="flex h-20 w-auto items-center gap-3"
         >
@@ -48,18 +48,27 @@ const Navbar = () => {
               PHARMA
             </span>
           </div>
-        </Link>
+        </HomeLink>
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="cursor-pointer text-sm font-semibold text-slate-700 transition-colors hover:text-[#0B2F5B]"
-            >
-              {link.name}
-            </Link>
+            link.href === "/" ? (
+              <HomeLink
+                key={link.name}
+                className="cursor-pointer text-sm font-semibold text-slate-700 transition-colors hover:text-[#0B2F5B]"
+              >
+                {link.name}
+              </HomeLink>
+            ) : (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="cursor-pointer text-sm font-semibold text-slate-700 transition-colors hover:text-[#0B2F5B]"
+              >
+                {link.name}
+              </Link>
+            )
           ))}
         </nav>
 
@@ -91,14 +100,24 @@ const Navbar = () => {
           <nav className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
             <div className="flex flex-col">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className="block cursor-pointer border-b border-slate-100 px-2 py-4 text-sm font-semibold text-slate-700 transition-colors hover:text-[#0B2F5B]"
-                >
-                  {link.name}
-                </Link>
+                link.href === "/" ? (
+                  <HomeLink
+                    key={link.name}
+                    onClick={closeMenu}
+                    className="block cursor-pointer border-b border-slate-100 px-2 py-4 text-sm font-semibold text-slate-700 transition-colors hover:text-[#0B2F5B]"
+                  >
+                    {link.name}
+                  </HomeLink>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={closeMenu}
+                    className="block cursor-pointer border-b border-slate-100 px-2 py-4 text-sm font-semibold text-slate-700 transition-colors hover:text-[#0B2F5B]"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
 
               <a
