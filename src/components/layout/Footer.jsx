@@ -100,7 +100,7 @@ const Footer = () => {
                     <a
                       href={office.mapsUrl}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="cursor-pointer transition hover:text-[#72c51b]"
                     >
                       {office.lines.map((line) => (

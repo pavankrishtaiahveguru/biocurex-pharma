@@ -9,8 +9,7 @@ const offices = [
       "Hyderabad, Telangana",
       "PIN: 500019",
     ],
-    mapAddress:
-      "Head Office: Hyderabad, Rama Constructions, Plot No. 11, 3rd Floor, Gulmohar Park, Serilingampally, Hyderabad, Telangana, PIN: 500019",
+    mapsUrl: "https://maps.app.goo.gl/afmjWzUsct2gg4bz5?g_st=aw",
   },
   {
     name: "Local Office – Visakhapatnam",
@@ -21,13 +20,9 @@ const offices = [
       "Industrial Estate",
       "Visakhapatnam - 07",
     ],
-    mapAddress:
-      "Local Office, 37-7-56, G/F, Sathya Nagar, Opp 5th Town Police Station, Industrial Estate, Visakhapatnam - 07",
+    mapsUrl: "https://maps.app.goo.gl/bsdzWbF7SGSYrqkh6",
   },
-].map((office) => ({
-  ...office,
-  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.mapAddress)}`,
-}));
+];
 
 const contactInfo = {
   email: "Biocurex9@gmail.com",

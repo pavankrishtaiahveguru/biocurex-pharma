@@ -124,15 +124,11 @@ const ContactPage = () => {
                       <h2 className="text-xl font-bold text-[#0B2F5B]">
                         {office.name}
                       </h2>
-                      {office.contactPerson && (
-                        <p className="mt-2 text-sm font-semibold text-slate-700">
-                          {office.contactPerson}
-                        </p>
-                      )}
+
                       <a
                         href={office.mapsUrl}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="mt-3 block cursor-pointer text-sm leading-6 text-slate-600 transition hover:text-[#5FAE16]"
                       >
                         {office.lines.map((line) => (
