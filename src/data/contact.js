@@ -9,7 +9,7 @@ const offices = [
       "Hyderabad, Telangana",
       "PIN: 500019",
     ],
-    mapsUrl: "https://maps.app.goo.gl/afmjWzUsct2gg4bz5?g_st=aw",
+    mapsUrl: "https://maps.app.goo.gl/iHvGHJLk3waBSJMF6",
   },
   {
     name: "Local Office – Visakhapatnam",
