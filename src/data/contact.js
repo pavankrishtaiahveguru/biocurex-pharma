@@ -1,7 +1,6 @@
 const offices = [
   {
     name: "Head Office – Hyderabad",
-    contactPerson: "Nani Honey",
     phoneIndex: 0,
     lines: [
       "Rama Constructions",
