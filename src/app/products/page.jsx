@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import products from "@/data/products";
+import AllProducts from "@/components/common/AllProducts";
 
 const ProductsPage = () => {
   const galleryImages = [
@@ -387,10 +388,6 @@ const ProductsPage = () => {
                       <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#72C51B]">
                         BioCurex Pharma
                       </p>
-
-                      <p className="mt-1 text-lg font-bold text-white">
-                        View Product
-                      </p>
                     </div>
 
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0B2F5B]">
@@ -401,6 +398,8 @@ const ProductsPage = () => {
               </Link>
             ))}
           </div>
+
+          <AllProducts />
 
           {/* Bottom Statement */}
           <div className="mt-10 flex flex-col items-start justify-between gap-5 border-t border-slate-200 pt-6 sm:flex-row sm:items-center">
