@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
+import contactInfo from "@/data/contact";
 
 const Hero = () => {
   return (
@@ -62,6 +63,14 @@ const Hero = () => {
               Contact Us
             </Link>
           </div>
+
+          <a
+            href={contactInfo.phones[0].href}
+            className="mt-5 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-white/90 transition hover:text-[#72c51b]"
+          >
+            <Phone className="h-4 w-4" />
+            Call {contactInfo.phones[0].display}
+          </a>
 
           {/* Trust Points */}
           <div className="mt-12 flex flex-wrap gap-x-8 gap-y-4 border-t border-white/20 pt-6">

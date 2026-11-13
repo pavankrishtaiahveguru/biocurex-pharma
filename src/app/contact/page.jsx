@@ -1,35 +1,65 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone, Send, Clock } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Mail, MapPin, Phone, Send } from "lucide-react";
+import contactInfo from "@/data/contact";
 
 const ContactPage = () => {
-  const contactDetails = [
-    {
-      icon: MapPin,
-      title: "Our Location",
-      text: "Andhra Pradesh, India",
-      href: "#",
-    },
-    {
-      icon: Phone,
-      title: "Call Us",
-      text: "+91 99999 99999",
-      href: "tel:+919999999999",
-    },
-    {
-      icon: Mail,
-      title: "Email Us",
-      text: "info@biocurexpharma.com",
-      href: "mailto:info@biocurexpharma.com",
-    },
-    {
-      icon: Clock,
-      title: "Business Hours",
-      text: "Monday – Saturday, 9:00 AM – 6:00 PM",
-      href: "#",
-    },
-  ];
+  const subjectRef = useRef(null);
+  const [notice, setNotice] = useState(null);
+
+  useEffect(() => {
+    const product = new URLSearchParams(window.location.search).get("product");
+    if (product && subjectRef.current) {
+      subjectRef.current.value = product;
+    }
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setNotice(null);
+
+    const submittedForm = event.currentTarget;
+    if (!submittedForm.reportValidity()) {
+      return;
+    }
+
+    const submittedValues = new FormData(submittedForm);
+    const product = new URLSearchParams(window.location.search).get("product");
+    const message = [
+      "New Enquiry - BioCurex Pharma",
+      "",
+      `Name: ${submittedValues.get("name")}`,
+      `Email: ${submittedValues.get("email")}`,
+      `Phone: ${submittedValues.get("phone")}`,
+      `Product/Subject: ${submittedValues.get("subject")}`,
+      `Message: ${submittedValues.get("message")}`,
+    ].join("\n");
+    const whatsappUrl = `https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    try {
+      const whatsappWindow = window.open(whatsappUrl, "_blank");
+      if (!whatsappWindow) {
+        throw new Error("WhatsApp could not be opened.");
+      }
+      whatsappWindow.opener = null;
+      setNotice({
+        type: "success",
+        message: "Your enquiry is ready to send on WhatsApp.",
+      });
+      submittedForm.reset();
+      if (subjectRef.current) {
+        subjectRef.current.value = product || "";
+      }
+    } catch {
+      setNotice({
+        type: "error",
+        message:
+          "We could not open WhatsApp. Please allow pop-ups and try again.",
+      });
+    }
+  };
 
   return (
     <main className="bg-white">
@@ -74,30 +104,72 @@ const ContactPage = () => {
       {/* Contact Information */}
       <section className="py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {contactDetails.map((item) => {
-              const Icon = item.icon;
+          <div className="grid gap-6 lg:grid-cols-2">
+            {contactInfo.offices.map((office) => {
+              const phone =
+                typeof office.phoneIndex === "number"
+                  ? contactInfo.phones[office.phoneIndex]
+                  : null;
 
               return (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#5FAE16]/40 hover:shadow-xl"
+                <article
+                  key={office.name}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#5FAE16]/40 hover:shadow-xl sm:p-8"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F1F8E9] text-[#5FAE16] transition-colors duration-300 group-hover:bg-[#5FAE16] group-hover:text-white">
-                    <Icon className="h-5 w-5" />
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F1F8E9] text-[#5FAE16]">
+                      <MapPin className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <h2 className="text-xl font-bold text-[#0B2F5B]">
+                        {office.name}
+                      </h2>
+                      {office.contactPerson && (
+                        <p className="mt-2 text-sm font-semibold text-slate-700">
+                          {office.contactPerson}
+                        </p>
+                      )}
+                      <a
+                        href={office.mapsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-3 block cursor-pointer text-sm leading-6 text-slate-600 transition hover:text-[#5FAE16]"
+                      >
+                        {office.lines.map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
+                      </a>
+                    </div>
                   </div>
-
-                  <h3 className="mt-5 text-lg font-bold text-[#0B2F5B]">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {item.text}
-                  </p>
-                </a>
+                </article>
               );
             })}
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {contactInfo.phones.map((phone) => (
+              <a
+                key={phone.label}
+                href={phone.href}
+                className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white p-5 text-sm font-semibold text-[#0B2F5B] shadow-sm transition hover:border-[#5FAE16]/40 hover:text-[#5FAE16]"
+              >
+                <Phone className="h-5 w-5 shrink-0 text-[#5FAE16]" />
+                <span>
+                  <span className="block text-xs font-medium text-slate-500">
+                    {phone.label}
+                  </span>
+                  {phone.display}
+                </span>
+              </a>
+            ))}
+            <a
+              href={contactInfo.emailHref}
+              className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white p-5 text-sm font-semibold text-[#0B2F5B] shadow-sm transition hover:border-[#5FAE16]/40 hover:text-[#5FAE16]"
+            >
+              <Mail className="h-5 w-5 shrink-0 text-[#5FAE16]" />
+              <span className="min-w-0 break-all">{contactInfo.email}</span>
+            </a>
           </div>
         </div>
       </section>
@@ -150,11 +222,11 @@ const ContactPage = () => {
                 </h3>
 
                 <p className="mt-2 text-sm text-slate-500">
-                  Fill in your details and our team will get back to you.
+                  Fill in your details to prepare an enquiry in WhatsApp.
                 </p>
               </div>
 
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
@@ -166,7 +238,9 @@ const ContactPage = () => {
 
                     <input
                       id="name"
+                      name="name"
                       type="text"
+                      required
                       placeholder="Enter your name"
                       className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-[#5FAE16] focus:bg-white focus:ring-4 focus:ring-[#5FAE16]/10"
                     />
@@ -182,7 +256,9 @@ const ContactPage = () => {
 
                     <input
                       id="email"
+                      name="email"
                       type="email"
+                      required
                       placeholder="Enter your email"
                       className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-[#5FAE16] focus:bg-white focus:ring-4 focus:ring-[#5FAE16]/10"
                     />
@@ -200,7 +276,9 @@ const ContactPage = () => {
 
                     <input
                       id="phone"
+                      name="phone"
                       type="tel"
+                      required
                       placeholder="Enter your phone number"
                       className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-[#5FAE16] focus:bg-white focus:ring-4 focus:ring-[#5FAE16]/10"
                     />
@@ -216,7 +294,10 @@ const ContactPage = () => {
 
                     <input
                       id="subject"
+                      name="subject"
                       type="text"
+                      ref={subjectRef}
+                      required
                       placeholder="Enter subject"
                       className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-[#5FAE16] focus:bg-white focus:ring-4 focus:ring-[#5FAE16]/10"
                     />
@@ -233,7 +314,9 @@ const ContactPage = () => {
 
                   <textarea
                     id="message"
+                    name="message"
                     rows={6}
+                    required
                     placeholder="Tell us how we can help you..."
                     className="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 focus:border-[#5FAE16] focus:bg-white focus:ring-4 focus:ring-[#5FAE16]/10"
                   />
@@ -246,6 +329,19 @@ const ContactPage = () => {
                   Send Message
                   <Send className="h-4 w-4" />
                 </button>
+                {notice && (
+                  <p
+                    role={notice.type === "error" ? "alert" : "status"}
+                    aria-live="polite"
+                    className={`fixed bottom-5 right-5 z-[60] w-[calc(100%-2.5rem)] max-w-sm rounded-2xl px-5 py-4 text-sm font-medium shadow-xl sm:w-auto ${
+                      notice.type === "error"
+                        ? "bg-red-50 text-red-700 ring-1 ring-red-200"
+                        : "bg-white text-[#0B2F5B] ring-1 ring-[#5FAE16]/30"
+                    }`}
+                  >
+                    {notice.message}
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -266,7 +362,7 @@ const ContactPage = () => {
 
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <a
-              href="mailto:info@biocurexpharma.com"
+              href={contactInfo.emailHref}
               className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-[#72c51b] px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-[#5ca817]"
             >
               <Mail className="h-4 w-4" />
@@ -274,7 +370,7 @@ const ContactPage = () => {
             </a>
 
             <a
-              href="tel:+919999999999"
+              href={contactInfo.phones[0].href}
               className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white hover:text-[#0B2F5B]"
             >
               <Phone className="h-4 w-4" />

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, Phone, X } from "lucide-react";
+import contactInfo from "@/data/contact";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,13 +65,13 @@ const Navbar = () => {
 
         {/* Desktop Contact */}
         <div className="hidden lg:flex">
-          <Link
-            href="/contact"
+          <a
+            href={contactInfo.phones[0].href}
             className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#0B2F5B] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#09264A] hover:shadow-lg"
           >
             <Phone size={17} />
-            Get In Touch
-          </Link>
+            {contactInfo.phones[0].display}
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -100,14 +101,14 @@ const Navbar = () => {
                 </Link>
               ))}
 
-              <Link
-                href="/contact"
+              <a
+                href={contactInfo.phones[0].href}
                 onClick={closeMenu}
                 className="mt-4 inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-[#0B2F5B] px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-[#09264A]"
               >
                 <Phone size={17} />
-                Get In Touch
-              </Link>
+                {contactInfo.phones[0].display}
+              </a>
             </div>
           </nav>
         </div>

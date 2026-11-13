@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Mail, MapPin, Phone } from "lucide-react";
 import DevelopedByStaffArc from "../common/DevelopedByStaffArc";
+import contactInfo from "@/data/contact";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -61,7 +62,7 @@ const Footer = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="block text-sm text-white/70 transition hover:text-[#72c51b]"
+                  className="block cursor-pointer text-sm text-white/70 transition hover:text-[#72c51b]"
                 >
                   {link.name}
                 </Link>
@@ -78,7 +79,7 @@ const Footer = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="block text-sm text-white/70 transition hover:text-[#72c51b]"
+                  className="block cursor-pointer text-sm text-white/70 transition hover:text-[#72c51b]"
                 >
                   {link.name}
                 </Link>
@@ -91,35 +92,48 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Contact Us</h3>
 
             <div className="mt-5 space-y-5">
-              <div className="flex gap-3">
-                <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#72c51b]" />
+              {contactInfo.offices.map((office) => (
+                <div key={office.name} className="flex gap-3">
+                  <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#72c51b]" />
+                  <div className="text-sm leading-6 text-white/70">
+                    <h4 className="font-semibold text-white">{office.name}</h4>
+                    <a
+                      href={office.mapsUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="cursor-pointer transition hover:text-[#72c51b]"
+                    >
+                      {office.lines.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </a>
+                  </div>
+                </div>
+              ))}
 
-                <p className="text-sm leading-6 text-white/70">
-                  Biocurex Pharma
-                  <br />
-                  Andhra Pradesh, India
-                </p>
-              </div>
+              {contactInfo.phones.map((phone) => (
+                <div key={phone.label} className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 shrink-0 text-[#72c51b]" />
 
-              <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-[#72c51b]" />
-
-                <a
-                  href="tel:+919999999999"
-                  className="text-sm text-white/70 transition hover:text-[#72c51b]"
-                >
-                  +91 99999 99999
-                </a>
-              </div>
+                  <a
+                    href={phone.href}
+                    className="cursor-pointer text-sm text-white/70 transition hover:text-[#72c51b]"
+                  >
+                    {phone.display}
+                  </a>
+                </div>
+              ))}
 
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-[#72c51b]" />
 
                 <a
-                  href="mailto:info@biocurexpharma.com"
-                  className="text-sm text-white/70 transition hover:text-[#72c51b]"
+                  href={contactInfo.emailHref}
+                  className="cursor-pointer break-all text-sm text-white/70 transition hover:text-[#72c51b]"
                 >
-                  info@biocurexpharma.com
+                  {contactInfo.email}
                 </a>
               </div>
             </div>

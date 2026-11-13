@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
+import contactInfo from "@/data/contact";
 
 const CTA = () => {
   return (
@@ -55,6 +56,14 @@ const CTA = () => {
                   Explore Products
                 </Link>
               </div>
+
+              <a
+                href={contactInfo.phones[0].href}
+                className="mt-5 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-[#72C51B]"
+              >
+                <Phone className="h-4 w-4" />
+                Call {contactInfo.phones[0].display}
+              </a>
             </div>
 
             {/* Right Side */}
