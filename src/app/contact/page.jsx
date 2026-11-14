@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Mail, MapPin, Phone, Send } from "lucide-react";
+import { FaInstagram } from "react-icons/fa";
 import contactInfo from "@/data/contact";
 
 const ContactPage = () => {
@@ -143,7 +144,7 @@ const ContactPage = () => {
               );
             })}
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {contactInfo.phones.map((phone) => (
               <a
                 key={phone.label}
@@ -165,6 +166,16 @@ const ContactPage = () => {
             >
               <Mail className="h-5 w-5 shrink-0 text-[#5FAE16]" />
               <span className="min-w-0 break-all">{contactInfo.email}</span>
+            </a>
+            <a
+              href="https://www.instagram.com/biocurexpharma?cplk=ZjFmd2ZicDU1azR2&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="BioCurex Pharma Instagram"
+              className="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white p-5 text-sm font-semibold text-[#0B2F5B] shadow-sm transition hover:border-[#5FAE16]/40 hover:text-[#5FAE16]"
+            >
+              <FaInstagram className="h-5 w-5 shrink-0 text-[#5FAE16]" />
+              <span>Instagram</span>
             </a>
           </div>
         </div>

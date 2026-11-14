@@ -194,6 +194,24 @@ const ProductsPage = () => {
       alt: "BioCurex Pharma product showcase",
       size: "small",
     },
+    {
+      id: 32,
+      src: "/images/gallery/image32.jpeg",
+      alt: "BioCurex Pharma product showcase",
+      size: "small",
+    },
+    {
+      id: 33,
+      src: "/images/gallery/image33.jpeg",
+      alt: "BioCurex Pharma product showcase",
+      size: "small",
+    },
+    {
+      id: 34,
+      src: "/images/gallery/image34.jpeg",
+      alt: "BioCurex Pharma product showcase",
+      size: "small",
+    },
   ];
 
   const sizeClasses = {

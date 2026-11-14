@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Mail, MapPin, Phone } from "lucide-react";
+import { FaInstagram } from "react-icons/fa";
 import DevelopedByStaffArc from "../common/DevelopedByStaffArc";
 import contactInfo from "@/data/contact";
 import HomeLink from "@/components/common/HomeLink";
@@ -59,7 +60,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Quick Links</h3>
 
             <div className="mt-5 space-y-3">
-              {quickLinks.map((link) => (
+              {quickLinks.map((link) =>
                 link.href === "/" ? (
                   <HomeLink
                     key={link.name}
@@ -75,8 +76,8 @@ const Footer = () => {
                   >
                     {link.name}
                   </Link>
-                )
-              ))}
+                ),
+              )}
             </div>
           </div>
 
@@ -146,6 +147,16 @@ const Footer = () => {
                   {contactInfo.email}
                 </a>
               </div>
+              <a
+                href="https://www.instagram.com/biocurexpharma?cplk=ZjFmd2ZicDU1azR2&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="BioCurex Pharma Instagram"
+                className="inline-flex cursor-pointer items-center gap-3 text-sm text-white/70 transition hover:text-[#72c51b]"
+              >
+                <FaInstagram className="h-5 w-5 text-[#72c51b]" />
+                <span>Instagram</span>
+              </a>
             </div>
           </div>
         </div>

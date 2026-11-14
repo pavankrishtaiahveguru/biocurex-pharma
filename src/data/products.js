@@ -228,6 +228,29 @@ const products = [
     description: "Cefpodoxime Proxetil & Potassium Clavulanate Tablets",
     image: "/images/catlogs/Goodpod-CV.jpeg",
   },
+  {
+    id: 32,
+    name: "Folcare-D3",
+    category: "Bone Health",
+    description:
+      "Ferrous Fumarate, Folic Acid, Vitamin-D3 & Cyanocobalamin Tablets",
+    image: "/images/catlogs/Folcare-D3.jpeg",
+  },
+  {
+    id: 33,
+    name: "NerveQ CD3",
+    category: "Neuro",
+    description:
+      "Methylcobalamin, Alpha Lipoic Acid, Benfotiamine, Pyridoxine HCl, Myo-Inositol, Calcium Carbonate, Vitamin D3, Folic Acid, Chromium & Selenium Tablets",
+    image: "/images/catlogs/NerveQ CD3.jpeg",
+  },
+  {
+    id: 34,
+    name: "Curemac 8MG",
+    category: "Pain Management",
+    description: "Aceclofenac & Thiocolchicoside Tablets",
+    image: "/images/catlogs/Curemac 8MG.jpeg",
+  },
 ];
 
 export default products;
