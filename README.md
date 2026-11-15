@@ -283,7 +283,7 @@ The floating button and the enquiry form both use **+91 70757 67646** (`91707576
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/pavankrishtaiahveguru/biocurex-pharma.git
+git clone https://github.com/biocurex9/biocurex-pharma.git
 cd biocurex-pharma
 
 # 2. Install dependencies
